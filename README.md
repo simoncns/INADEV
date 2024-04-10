@@ -1,7 +1,7 @@
 # INADEV
 
 Instructions:
-=============================================================================================================================================
+
 Software Development:
     1. Create a simple UI using any front-end technology to accept the zip code of a location
 
@@ -16,3 +16,7 @@ Deployment:
     1. Containerize the code using Docker and run the code locally on your laptop using Docker Desktop. **OPTIONAL - If you can, deploy the code on an EC2 instance on AWS. AWS Free tier instances should suffice
     
     2. Launch the web application using a browser and demonstrate the functionality
+
+
+
+Run Make to build and deploy locally using Docker.
