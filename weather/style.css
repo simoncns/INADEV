@@ -9,14 +9,6 @@ html, body {
     line-height: 1.6;
 }
 
-hr {
-    border: 0; /* Remove the default border */
-    height: 2px; /* Set the height of the line */
-    background-color: #ccc; /* Set the color of the line */
-    margin-top: 20px; /* Adjust space above the line */
-    margin-bottom: 20px; /* Adjust space below the line */
-}
-
 /* Center the form on the page */
 body {
     display: flex;
@@ -31,6 +23,8 @@ h1 {
 }
 
 form {
+    display: flex;
+    justify-content: center;
     align-items: center;
     background: #fff;
     padding: 2em;
