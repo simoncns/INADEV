@@ -9,6 +9,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = 'http://localhost:5000/weather?zip=' + zipCode;
 
         console.log(url);
-
     });
 });
