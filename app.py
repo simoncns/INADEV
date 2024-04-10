@@ -37,6 +37,30 @@ def home():
 #     print(response.json())
 #     return jsonify(response.json())
 
+@app.route('/weather', methods=['POST'])
+def get_weather():
+    data = request.get_json()  # Correctly retrieve data from JSON body
+    zip_code = data.get('zipCode')  # Use .get to avoid KeyError if zipCode is not provided
+    
+    if not zip_code:
+        return jsonify({'error': 'Zip code is required'}), 400  # Error if zip code is not provided
+    
+    lat, lon = coordinateCalculation(zip_code)  # Get coordinates based on zip code
+    
+    # Make sure lat and lon are valid
+    if lat is None or lon is None:
+        return jsonify({'error': 'Invalid zip code provided'}), 404
+    
+    # Open-Meteo API call using the obtained coordinates
+    api_url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch"
+    
+    response = requests.get(api_url)
+    if response.ok:
+        weather_data = response.json()  # Parse the JSON response from Open-Meteo
+        return jsonify(weather_data)  # Return the weather data as JSON
+    else:
+        return jsonify({'error': 'Failed to fetch weather data'}), 500
+
 # @app.route('/get-coordinates', methods=["GET", "POST"])
 # def get_coordinates():
 #     data = request.get_json()
@@ -54,8 +78,9 @@ def get_coordinates():
     else:  # GET request
         zip_code = request.args.get('zip')
     
-    print(coordinateCalculation(zip_code))
-    return jsonify({'zip': zip_code})
+    lat, lon = coordinateCalculation(zip_code)
+    return jsonify({'lat': lat,
+                    'lon': lon})
 
 if __name__ == '__main__':
     app.run(debug=True, port='0.0.0.0')
