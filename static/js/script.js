@@ -6,59 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const zipCode = document.getElementById('zip').value;
         console.log(zipCode);
 
-        const url = 'http://localhost:5000/get-coordinates?zip=' + encodeURIComponent(zipCode);
-
-        // console.log(url);
-
-        // fetch('/get-coordinates', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ zip: zipCode })
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log('Coordinates:', data);
-        //     // Handle the response data here
-        // })
-        // .catch((error) => {
-        //     console.error('Error:', error);
-        //     // Handle errors here
-        // });
-
-        // fetch(url)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log('Coordinates:', data);
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
-        fetch('/get-coordinates', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ zip: zipCode })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Parse the JSON from the response
-        })
-        .then(data => {
-            console.log('Coordinates:', data);
-            // Example of handling the response data:
-            // Update the DOM or trigger further actions based on the received coordinates
-            document.getElementById('results').textContent = `Latitude: ${data.lat}, Longitude: ${data.lon}`;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle errors here, such as displaying a message to the user
-        });
-
         fetch('/weather', {
             method: 'POST',
             headers: {
@@ -69,31 +16,41 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             console.log('Weather Data:', data);
-            // Assuming 'data' contains a 'current_weather' object with 'temperature', 'windspeed', etc.
+
+            const maxTemp = data.daily.temperature_2m_max[0];
+            const minTemp = data.daily.temperature_2m_min[0];
+            const sunrise = data.daily.sunrise[0];
+            const sunset = data.daily.sunset[0];
+
             const weatherResult = document.getElementById('weatherResult');
-            weatherResult.innerHTML = `Temperature: ${data.current.temperature_2m}°F`;
+            // weatherResult.innerHTML = `Temperature: ${data.current.temperature_2m}°F`;
+            weatherResult.innerHTML = `
+            <strong>Current Temperature:</strong> ${data.current.temperature_2m}°F<br>
+            <strong>Max Temperature:</strong> ${maxTemp}°F<br>
+            <strong>Min Temperature:</strong> ${minTemp}°F<br>
+            <strong>Sunrise:</strong> ${formatTime(sunrise)}<br>
+            <strong>Sunset:</strong> ${formatTime(sunset)}
+        `
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('weatherResult').textContent = 'Failed to fetch weather data';
+            document.getElementById('weatherResult').textContent = 'Invalid ZIP Code';
         });
 
-        // fetch('/weather', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ latitude: lat, longitude: lon }) // Assuming lat and lon are variables holding coordinates
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log('Weather Data:', data);
-        //     // Handle the weather data here
-        // })
-        // .catch((error) => {
-        //     console.error('Error:', error);
-        //     // Handle errors from the `/weather` call here
-        // });
+        function formatTime(time) {
+            // Create a date object using the ISO string
+            const date = new Date(time);
         
+            // Extract hours and minutes
+            var hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+        
+            if (hours > 11) {
+                hours = hours - 12;
+                return `${hours}:${minutes} PM`;
+            } else {
+                return `${hours}:${minutes} AM`;
+            }
+        }
     });
 });

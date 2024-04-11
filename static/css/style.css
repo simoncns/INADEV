@@ -1,79 +1,76 @@
 /* Reset some basic elements */
-html, body {
+body, h1, form, div {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    line-height: 1.6;
 }
 
-/* Center the form on the page */
+/* Apply global styles */
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
 body {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    background-image: url('/static/images/cloud.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    line-height: 1.6;
+    padding: 10px;
+}
+
+/* Center the form and the result display */
+form, #results, #weatherResult {
+    width: 100%;
+    max-width: 500px; /* Or your preferred max-width */
 }
 
 h1 {
-    text-align: center;
-    color: #102a43;
+    color: #333;
+    margin-bottom: 20px;
 }
 
+/* Style the form */
 form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: #fff;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    max-width: 400px;
-    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px; /* Space between form and result */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-label {
-    display: block;
-    margin-bottom: 0.5em;
-    color: #102a43;
-}
-
-input[type="text"] {
-    width: calc(100% - 22px);
+/* Style inputs and submit button */
+input[type="text"], input[type="submit"] {
     padding: 10px;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-top: 8px; /* Add space at the top of inputs */
+    width: calc(100% - 20px); /* Full width minus padding */
+    border: 1px solid #ddd;
+    border-radius: 4px; /* Rounded borders */
 }
 
 input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 5px;
+    color: #fff;
+    background-color: #007bff; /* Bootstrap primary color */
+    margin-top: 16px; /* More space at the top */
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darken button on hover */
 }
 
-/* Responsive adjustments */
-@media (max-width: 2000px) {
-    body {
-        padding: 20px;
-        height: initial;
-        display: block;
-    }
-
-    form {
-        padding: 20px;
-        box-shadow: none;
-    }
+/* Results and weather display */
+#results, #weatherResult {
+    background: #e9ecef; /* Light gray background */
+    color: #333;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center; /* Center text for results */
+    margin-top: 20px; /* Space between form/results and weather */
 }
