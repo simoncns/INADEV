@@ -23,15 +23,15 @@ form.addEventListener('submit', function(e) {
         const sunset = data.daily.sunset[0];
         const uvIndex = data.daily.uv_index_max[0]; 
         const weatherResult = document.getElementById('weatherResult');
-
+        
         // Update the front-end with the results of the API call
         weatherResult.innerHTML = `
-        <strong>Current Temperature:</strong> ${data.current.temperature_2m}°F<br>
-        <strong>High Temperature:</strong> ${maxTemp}°F<br>
-        <strong>Low Temperature:</strong> ${minTemp}°F<br>
-        <strong>Sunrise:</strong> ${formatTime(sunrise)}<br>
-        <strong>Sunset:</strong> ${formatTime(sunset)}<br>
-        <strong>UV Index:</strong> ${uvIndex}
+        <img src="/static/images/temp.png" alt="Temperature Icon" width="20" height="20"><strong>Current Temperature:</strong> ${data.current.temperature_2m}°F<br>
+        <img src="/static/images/hot.png" alt="High Temperature Icon" width="20" height="20"><strong>High Temperature:</strong> ${maxTemp}°F<br>
+        <img src="/static/images/cold.png" alt="Low Temperature Icon" width="20" height="20"><strong>Low Temperature:</strong> ${minTemp}°F<br>
+        <img src="/static/images/sunrise.png" alt="Sunrise" width="20" height="20"><strong>Sunrise:</strong> ${formatTime(sunrise)}<br>
+        <img src="/static/images/sunset.png" alt="Sunset" width="20" height="20"><strong>Sunset:</strong> ${formatTime(sunset)}<br>
+        <img src="/static/images/uv-index.png" alt="UV Index" width="20" height="20"><strong>UV Index:</strong> ${uvIndex}
     `
     })
     // Error message given if the ZIP code is not valid
