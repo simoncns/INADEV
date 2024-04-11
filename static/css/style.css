@@ -1,11 +1,9 @@
-/* Reset some basic elements */
 body, h1, form, div {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Apply global styles */
 html, body {
     height: 100%;
     font-family: Arial, sans-serif;
@@ -13,9 +11,9 @@ html, body {
 
 body {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-image: url('/static/images/cloud.jpg');
     background-size: cover;
     background-position: center;
@@ -25,9 +23,9 @@ body {
 }
 
 /* Center the form and the result display */
-form, #results, #weatherResult {
+form, #weatherResult {
     width: 100%;
-    max-width: 500px; /* Or your preferred max-width */
+    max-width: 500px;
 }
 
 h1 {
@@ -37,9 +35,9 @@ h1 {
 
 /* Style the form */
 form {
-    background: #fff;
+    background: #e9ecef;
     padding: 20px;
-    margin-bottom: 20px; /* Space between form and result */
+    margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -47,7 +45,7 @@ form {
 /* Style inputs and submit button */
 input[type="text"], input[type="submit"] {
     padding: 10px;
-    margin-top: 8px; /* Add space at the top of inputs */
+    margin-top: 8px;
     width: calc(100% - 20px); /* Full width minus padding */
     border: 1px solid #ddd;
     border-radius: 4px; /* Rounded borders */
@@ -61,12 +59,12 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Darken button on hover */
+    background-color: #0056b3; /* Darken button when hovering over */
 }
 
-/* Results and weather display */
-#results, #weatherResult {
-    background: #e9ecef; /* Light gray background */
+/* Weather display */
+#weatherResult {
+    background: #e9ecef;
     color: #333;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
